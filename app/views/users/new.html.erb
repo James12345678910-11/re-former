@@ -1,22 +1,51 @@
-<form action="/users" method="post" accept-charset="UTF-8" data-turbo="false">
-<input
-type="hidden"
-name="authenticity_token"
-value="<%= form_authenticity_token %>"
->
+<!--
+<%= form_tag users_path, method: :post, data: { turbo: false } do %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <%= label_tag :username, "Name" %><br>
+  <%= text_field_tag "user[username]", nil, required: true %><br><br>
+
+  <%= label_tag :email, "Email" %><br>
+  <%= email_field_tag "user[email]", nil, required: true %><br><br>
+
+  <%= label_tag :password, "Password" %><br>
+  <%= password_field_tag "user[password]", nil, required: true %><br><br>
+
+  <%= label_tag :password_confirmation, "Confirm Password" %><br>
+  <%= password_field_tag "user[password_confirmation]", nil, required: true %><br><br>
+
+  <%= submit_tag "Create User" %>
+<% end %>
+-->
 
 
-<label for="user_name">Name</label>
-<input type="text" id="user_name" name="user[name]" required><br><br>
+ <h1>New User</h1>
 
-<label for="user_email">Email</label>
-<input type="email" id="user_email" name="user[email]" required><br><br>
+<%= form_with model: @user, local: true do |form| %>
+  <div>
+    <%= form.label :username %><br>
+    <%= form.text_field :username, required: true %>
+  </div>
+  <br>
 
-<label for="user_password">Password</label>
-<input type="password" id="user_password" name="user[password]" required><br><br>
+  <div>
+    <%= form.label :email %><br>
+    <%= form.email_field :email, required: true %>
+  </div>
+  <br>
 
-<label for="user_password_confirmation">Confirm Password:</label><br>
-  <input type="password" id="user_password_confirmation" name="user[password_confirmation]" required><br><br>
+  <div>
+    <%= form.label :password %><br>
+    <%= form.password_field :password, required: true %>
+  </div>
+  <br>
 
-  <input type="submit" value="Create User">
-</form>
+  <div>
+    <%= form.label :password_confirmation, "Confirm Password" %><br>
+    <%= form.password_field :password_confirmation, required: true %>
+  </div>
+  <br>
+
+  <%= form.submit "Create User" %>
+
+<% end %>
